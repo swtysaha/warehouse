@@ -1,4 +1,4 @@
-package com.shawfurniturespace.warehouse.controller;
+package com.shawfurniturespace.warehouse.dto;
 
 public class ProductRequestDto {
 

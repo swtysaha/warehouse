@@ -2,7 +2,7 @@ package com.shawfurniturespace.warehouse.service;
 
 import java.util.List;
 
-import com.shawfurniturespace.warehouse.controller.ProductRequestDto;
+import com.shawfurniturespace.warehouse.dto.ProductRequestDto;
 import com.shawfurniturespace.warehouse.exception.WareHouseException;
 import com.shawfurniturespace.warehouse.model.Product;
 

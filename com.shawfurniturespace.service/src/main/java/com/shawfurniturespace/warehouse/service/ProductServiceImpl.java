@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shawfurniturespace.warehouse.ApplicationConfiguration;
-import com.shawfurniturespace.warehouse.controller.ProductRequestDto;
+import com.shawfurniturespace.warehouse.dto.ProductRequestDto;
 import com.shawfurniturespace.warehouse.exception.WareHouseException;
 import com.shawfurniturespace.warehouse.model.Product;
 import com.shawfurniturespace.warehouse.repository.ProductRepository;
