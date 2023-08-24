@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.shawfurniturespace.warehouse.dto.ProductRequestDto;
 import com.shawfurniturespace.warehouse.exception.WareHouseException;
 import com.shawfurniturespace.warehouse.model.Product;
 import com.shawfurniturespace.warehouse.service.ProductService;
