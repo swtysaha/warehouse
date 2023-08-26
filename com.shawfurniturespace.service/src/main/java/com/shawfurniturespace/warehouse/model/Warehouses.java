@@ -8,17 +8,34 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Warehouses {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name = "id")
 	private Integer id;
-	
+
 	@Column(name = "capacity")
-	private Integer capcity	;
-	
+	private Integer capacity;
+
+	@Column(name = "Available_space")
+	private Integer availableSpace;
+
 	@Column(name = "location")
 	private String location;
+
+	/**
+	 * @return the availableSpace
+	 */
+	public Integer getAvailableSpace() {
+		return availableSpace;
+	}
+
+	/**
+	 * @param availableSpace the availableSpace to set
+	 */
+	public void setAvailableSpace(Integer availableSpace) {
+		this.availableSpace = availableSpace;
+	}
 
 	/**
 	 * @return the id
@@ -34,18 +51,20 @@ public class Warehouses {
 		this.id = id;
 	}
 
+	
+
 	/**
-	 * @return the capcity
+	 * @return the capacity
 	 */
-	public Integer getCapcity() {
-		return capcity;
+	public Integer getCapacity() {
+		return capacity;
 	}
 
 	/**
-	 * @param capcity the capcity to set
+	 * @param capacity the capacity to set
 	 */
-	public void setCapcity(Integer capcity) {
-		this.capcity = capcity;
+	public void setCapacity(Integer capacity) {
+		this.capacity = capacity;
 	}
 
 	/**
@@ -61,6 +80,5 @@ public class Warehouses {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	
 
 }

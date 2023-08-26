@@ -14,5 +14,10 @@ public interface ProductService {
 
 	public Product getProductById(int prodId) throws WareHouseException;
 
+	public void deleteProduct(Integer id) throws WareHouseException;
+	
+	public Product updateProduct(ProductRequestDto productDto) throws WareHouseException;
+	
 	public Product saveProduct(ProductRequestDto productDto) throws WareHouseException;
+	
 }

@@ -8,7 +8,7 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.servers.Server;
 
 @Configuration
-public class SwaggerDemoApplication {
+public class SpringDocsConfig {
    
 	@Bean
    public OpenAPI javaStarterAPI() {

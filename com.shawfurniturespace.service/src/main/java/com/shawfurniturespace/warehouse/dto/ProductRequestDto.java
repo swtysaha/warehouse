@@ -2,26 +2,14 @@ package com.shawfurniturespace.warehouse.dto;
 
 public class ProductRequestDto {
 
-	private Integer productId;
-	private String name;
 	
+	private String name;
+	private Integer productId;
 	private String description;
 	private float price;
 	private int quantity;
-	private String manufacturer;
-	private int categoryId;
-	/**
-	 * @return the productId
-	 */
-	public Integer getProductId() {
-		return productId;
-	}
-	/**
-	 * @param productId the productId to set
-	 */
-	public void setProductId(Integer productId) {
-		this.productId = productId;
-	}
+	private int warehouseId;
+
 	/**
 	 * @return the name
 	 */
@@ -71,29 +59,30 @@ public class ProductRequestDto {
 		this.quantity = quantity;
 	}
 	/**
-	 * @return the manufacturer
+	 * @return the warehouseId
 	 */
-	public String getManufacturer() {
-		return manufacturer;
+	public int getWarehouseId() {
+		return warehouseId;
 	}
 	/**
-	 * @param manufacturer the manufacturer to set
+	 * @param warehouseId the warehouseId to set
 	 */
-	public void setManufacturer(String manufacturer) {
-		this.manufacturer = manufacturer;
+	public void setWarehouseId(int warehouseId) {
+		this.warehouseId = warehouseId;
 	}
 	/**
-	 * @return the categoryId
+	 * @return the productId
 	 */
-	public int getCategoryId() {
-		return categoryId;
+	public Integer getProductId() {
+		return productId;
 	}
 	/**
-	 * @param categoryId the categoryId to set
+	 * @param productId the productId to set
 	 */
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
+	public void setProductId(Integer productId) {
+		this.productId = productId;
 	}
+
 	
 	
 	
