@@ -36,17 +36,44 @@ public class WarehousesServiceImpl implements WarehousesService {
 		return warehouseRepository.save(prodcutMap);
 	}
 	
+	/**
+	 * Update warehouse data  
+	 */
 	@Override
 	public Warehouses updateWarehouse(WarehousesRequestDto warehouseDto) throws WareHouseException {
-		Warehouses prodcutMap = mapper.map(warehouseDto, Warehouses.class);
-		return warehouseRepository.save(prodcutMap);
+		
+		Optional<Warehouses> warehouseObj = warehouseRepository.findById(warehouseDto.getId());
+		if (warehouseObj.isPresent()) {
+			Warehouses objToUpdate = warehouseObj.get();
+
+			int previousCapacity = objToUpdate.getCapacity();
+			int currentCapacity = warehouseDto.getCapacity();
+			int previousAvailableSpace = objToUpdate.getAvailableSpace();
+			
+			int diffCapacity = currentCapacity - previousCapacity;
+			
+
+			if (diffCapacity>=0) {
+				
+				objToUpdate.setCapacity(previousCapacity+diffCapacity);
+				objToUpdate.setAvailableSpace(previousAvailableSpace+diffCapacity);
+			}else {
+				throw new WareHouseException("Cannot decrease the capacity");
+			}
+				return warehouseRepository.save(objToUpdate);
+		
+		}else {
+			throw new WareHouseException("Warehouse could not be found");
+		}
 	}
+			
+
+			
 
 	@Override
 	public void deleteWarehouse(Integer id) throws WareHouseException {
-		// TODO Auto-generated method stub
 		warehouseRepository.deleteById(id);
-		
+				
 	}
 
 

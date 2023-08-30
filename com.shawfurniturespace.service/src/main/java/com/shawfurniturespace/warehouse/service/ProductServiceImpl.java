@@ -45,6 +45,9 @@ public class ProductServiceImpl implements ProductService {
 		return productFromDB.get();
 	}
 
+	/**
+	 * Check the capacity then Save product details accordingly
+	 */
 	@Transactional
 	@Override
 	public Product saveProduct(ProductRequestDto productDto) throws WareHouseException {
@@ -74,6 +77,9 @@ public class ProductServiceImpl implements ProductService {
 		}
 
 	}
+	/**
+	 * Delete the product and update the availability in warehouse
+	 */
 
 	@Override
 	public void deleteProduct(Integer id) throws WareHouseException {
@@ -107,7 +113,7 @@ public class ProductServiceImpl implements ProductService {
 				Product product = productFound.get();
 				int previousQuantity = product.getQuantity();
 				int currentQuantity = productDto.getQuantity();
-				// increasin in quantity so decrease in avail
+				// increasing in quantity so decrease in avail
 				int finalAvail = currentQuantity;
 				if (currentQuantity > previousQuantity) {
 					finalAvail = objToUpdate.getAvailableSpace() - (currentQuantity - previousQuantity);

@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shawfurniturespace.warehouse.dto.ProductRequestDto;
 import com.shawfurniturespace.warehouse.dto.WarehousesRequestDto;
 import com.shawfurniturespace.warehouse.exception.WareHouseException;
-import com.shawfurniturespace.warehouse.model.Product;
 import com.shawfurniturespace.warehouse.model.Warehouses;
 import com.shawfurniturespace.warehouse.service.WarehousesService;
-
+/**
+ * Controller for Handling CRUD operation for warehouse 
+ */
 @RestController
 @RequestMapping("/warehouses")
 @CrossOrigin(origins = {"http://localhost:4200"})
@@ -35,31 +35,36 @@ public class WarehouseServiceController {
 	
 	
 
-	
+	/**
+	 * Get all the data from warehouse table 
+	 * @return
+	 * @throws WareHouseException
+	 */
 	@GetMapping("/all")
-	public ResponseEntity<List<Warehouses>> getAllWarehouses(){
+	public ResponseEntity<List<Warehouses>> getAllWarehouses() throws WareHouseException{
 		List<Warehouses> allWarehousesList = new ArrayList<>();
-		try {
-			allWarehousesList = warehouseService.getAllWarehouses();
-		} catch (WareHouseException e) {
-			
-		}
+		allWarehousesList = warehouseService.getAllWarehouses();
 		return new ResponseEntity<List<Warehouses>>(allWarehousesList, HttpStatus.OK);
 		 
 	}
+	
+	/** 
+	 * delete warehouse by id 
+	 * @param id
+	 * @throws WareHouseException
+	 */
 	@DeleteMapping("/id/{id}")
-	public ResponseEntity<String> deleteWarehouseById(@PathVariable Integer id){
-		
-		try {
-			 warehouseService.deleteWarehouse(id);
-		} catch (WareHouseException e) {
-			return new ResponseEntity<String>("Deleted Unsuccessfully", HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return new ResponseEntity<String>("Deleted Successfully", HttpStatus.OK);
+	public void deleteWarehouseById(@PathVariable Integer id) throws WareHouseException{
+		warehouseService.deleteWarehouse(id);
 		 
 	}
 	
-	
+	/**
+	 * Save the Warehouse data 
+	 * @param WarehousesRequestdto
+	 * @return
+	 * @throws WareHouseException
+	 */
 	@PostMapping("/store")
 	public ResponseEntity<Warehouses> storeWarehouses(@RequestBody WarehousesRequestDto WarehousesRequestdto) throws WareHouseException{
 		Warehouses saveWarehouses = null;
@@ -67,17 +72,16 @@ public class WarehouseServiceController {
 		return new ResponseEntity<>(saveWarehouses, HttpStatus.OK);
 		 
 	}
-	
+	/**
+	 * Update the warehouse data
+	 * @param WarehousesRequestdto
+	 * @return
+	 * @throws WareHouseException
+	 */
 	@PutMapping("/update")
-	public ResponseEntity<Warehouses> updateWarehouse(@RequestBody WarehousesRequestDto WarehousesRequestdto){
+	public ResponseEntity<Warehouses> updateWarehouse(@RequestBody WarehousesRequestDto WarehousesRequestdto) throws WareHouseException{
 		Warehouses savewarehouse = null;
-		try {
-			 savewarehouse = warehouseService.updateWarehouse(WarehousesRequestdto);
-			
-		} catch (WareHouseException e) {
-			savewarehouse = new Warehouses();
-			return new ResponseEntity<>(savewarehouse, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		savewarehouse = warehouseService.updateWarehouse(WarehousesRequestdto);
 		return new ResponseEntity<>(savewarehouse, HttpStatus.OK);
 		 
 	}

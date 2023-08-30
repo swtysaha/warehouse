@@ -22,21 +22,24 @@ import com.shawfurniturespace.warehouse.exception.WareHouseException;
 import com.shawfurniturespace.warehouse.model.Product;
 import com.shawfurniturespace.warehouse.service.ProductService;
 
-import io.swagger.v3.oas.annotations.media.ArraySchema;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-
+/**
+ * Controller for Handling CRUD operation for products 
+ */
 @RestController
 @RequestMapping("/product")
 @CrossOrigin(origins = {"http://localhost:4200"})
 @Transactional
+
 public class ProductServiceController {
 	
 	@Autowired
 	ProductService productService;
 	
+	/**
+	 * Get Product by id
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/id/{id}")
 	public ResponseEntity<Product> getProductById(@PathVariable Integer id){
 		Product product;
@@ -49,57 +52,50 @@ public class ProductServiceController {
 		return new ResponseEntity<Product>(product, HttpStatus.OK);
 		 
 	}
-
+	/**
+	 * Get All products
+	 * @return
+	 * @throws WareHouseException
+	 */
 	@GetMapping("/all")
-	public ResponseEntity<List<Product>> getAllProduct(){
+	public ResponseEntity<List<Product>> getAllProduct() throws WareHouseException{
 		List<Product> allProductList = new ArrayList<>();
-		try {
-			allProductList = productService.getAllProducts();
-		} catch (WareHouseException e) {
-			
-		}
+		allProductList = productService.getAllProducts();
 		return new ResponseEntity<List<Product>>(allProductList, HttpStatus.OK);
 		 
 	}
-	
+	/**
+	 * Save the product details in database
+	 * @param productRequestdto
+	 * @return
+	 * @throws WareHouseException
+	 */
 	@PostMapping("/store")
-	public ResponseEntity<Product> storeProduct(@RequestBody ProductRequestDto productRequestdto){
-		Product saveProduct = null;
-		try {
-			 saveProduct = productService.saveProduct(productRequestdto);
-			
-		} catch (WareHouseException e) {
-			saveProduct = new Product();
-			saveProduct.setDescription(e.getMessage());
-			return new ResponseEntity<>(saveProduct, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+	public ResponseEntity<Product> storeProduct(@RequestBody ProductRequestDto productRequestdto) throws WareHouseException{
+		Product saveProduct = productService.saveProduct(productRequestdto);
 		return new ResponseEntity<>(saveProduct, HttpStatus.OK);
 		 
 	}
-	
+	/**
+	 * Delete Product from id
+	 * @param id
+	 * @throws WareHouseException
+	 */
 	@DeleteMapping("/id/{id}")
-	public ResponseEntity<String> deleteProductById(@PathVariable Integer id){
-		
-		try {
-			productService.deleteProduct(id);
-		} catch (WareHouseException e) {
-			return new ResponseEntity<String>("Deleted Unsuccessfully", HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return new ResponseEntity<String>("Deleted Successfully", HttpStatus.OK);
+	public void deleteProductById(@PathVariable Integer id) throws WareHouseException{
+		productService.deleteProduct(id);
 		 
 	}
+	/**
+	 * Update the product details 
+	 * @param productRequestdto
+	 * @return
+	 * @throws WareHouseException
+	 */
 	
 	@PutMapping("/update")
-	public ResponseEntity<Product> updateProduct(@RequestBody ProductRequestDto productRequestdto){
-		Product saveProduct = null;
-		try {
-			 saveProduct = productService.updateProduct(productRequestdto);
-			
-		} catch (WareHouseException e) {
-			saveProduct = new Product();
-			saveProduct.setDescription(e.getMessage());
-			return new ResponseEntity<>(saveProduct, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+	public ResponseEntity<Product> updateProduct(@RequestBody ProductRequestDto productRequestdto) throws WareHouseException{
+		Product saveProduct = productService.updateProduct(productRequestdto);
 		return new ResponseEntity<>(saveProduct, HttpStatus.OK);
 		 
 	}
