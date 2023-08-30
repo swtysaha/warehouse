@@ -61,7 +61,7 @@ public class ProductServiceImpl implements ProductService {
 			if (objToUpdate.getAvailableSpace() == productDto.getQuantity()
 					|| objToUpdate.getAvailableSpace() > productDto.getQuantity()) {
 
-				int availableSpace = (objToUpdate.getCapacity()) - (productDto.getQuantity());
+				int availableSpace = (objToUpdate.getAvailableSpace()) - (productDto.getQuantity());
 				objToUpdate.setAvailableSpace(availableSpace);
 
 				Product savedProduct = productRepository.save(prodcutMap);

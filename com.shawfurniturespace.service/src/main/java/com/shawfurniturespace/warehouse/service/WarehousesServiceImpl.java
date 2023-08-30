@@ -54,14 +54,18 @@ public class WarehousesServiceImpl implements WarehousesService {
 			
 
 			if (diffCapacity>=0) {
-				
+				int finalAvl = previousAvailableSpace+diffCapacity;
 				objToUpdate.setCapacity(previousCapacity+diffCapacity);
-				objToUpdate.setAvailableSpace(previousAvailableSpace+diffCapacity);
+				if (finalAvl<=objToUpdate.getCapacity()) {
+				objToUpdate.setAvailableSpace(finalAvl);
+				}else {
+					throw new WareHouseException("Availability cannot be more than capacity");
+				}
 			}else {
 				throw new WareHouseException("Cannot decrease the capacity");
 			}
-				return warehouseRepository.save(objToUpdate);
-		
+			
+			return warehouseRepository.save(objToUpdate);
 		}else {
 			throw new WareHouseException("Warehouse could not be found");
 		}
