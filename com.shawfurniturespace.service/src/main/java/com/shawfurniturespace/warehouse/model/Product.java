@@ -10,6 +10,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 /**
  * 
@@ -19,26 +21,24 @@ public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="product_id")
+	@Column(name = "product_id")
 	private Integer productId;
 
-	@Column(name="name")
+	@Column(name = "name")
 	String name;
-	
-	@Column(name="description")
+
+	@Column(name = "description")
 	String description;
-	
-	@Column(name="price")
+
+	@Column(name = "price")
 	BigDecimal price;
-	
-	@Column(name="quantity")
-	int quantity;
-	
-	@Column(name="manufacturer")
-	String manufacturer;
-		
-	@Column(name="category_id")
-	int categoryId;
+
+	@Column(name = "quantity")
+	Integer quantity;
+
+	@OneToOne
+	@JoinColumn(name = "warehouse_id")
+	Warehouses warehouseId;
 
 	/**
 	 * @return the productId
@@ -82,8 +82,6 @@ public class Product {
 		this.description = description;
 	}
 
-	
-
 	/**
 	 * @return the price
 	 */
@@ -113,35 +111,25 @@ public class Product {
 	}
 
 	/**
-	 * @return the manufacturer
+	 * @return the warehouseId
 	 */
-	public String getManufacturer() {
-		return manufacturer;
+	public Warehouses getWarehouseId() {
+		return warehouseId;
 	}
 
 	/**
-	 * @param manufacturer the manufacturer to set
+	 * @param warehouseId the warehouseId to set
 	 */
-	public void setManufacturer(String manufacturer) {
-		this.manufacturer = manufacturer;
+	public void setWarehouseId(Warehouses warehouseId) {
+		this.warehouseId = warehouseId;
 	}
 
 	/**
-	 * @return the categoryId
+	 * @param quantity the quantity to set
 	 */
-	public int getCategoryId() {
-		return categoryId;
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 
-	/**
-	 * @param categoryId the categoryId to set
-	 */
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
-	}
-
-	
-	
-	
 
 }
